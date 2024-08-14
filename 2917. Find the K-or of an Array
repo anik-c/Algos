@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int countSetBit(int i){
+        int count=0;
+        while(i){
+            if(i&1){
+                count++;
+            }
+            i=i>>1;
+        }
+        return count;
+    }
+    int sumIndicesWithKSetBits(vector<int>& nums, int k) {
+        int ans=0;
+        for(int i=0;i<nums.size();i++){
+            if(countSetBit(i)==k){
+                ans+=nums[i];
+            }
+        }
+        return ans;
+    }
+};
