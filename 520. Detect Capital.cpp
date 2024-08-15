@@ -2,13 +2,8 @@
     My approach: I iterate through each            character checking the condition given in the question. If checks true we increment the count.At last check whether the count is equal to given word size or not.
 
 */
-
-
- 
-
-
-
-
+Time Complexity:
+Only iterating on the size of word so, O(sizeofword).
 
 bool detectCapitalUse(string word) {
         int upperCount=0;
