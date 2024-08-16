@@ -1,1 +1,1 @@
-# LC
+Solution of LeetCode Problems.
