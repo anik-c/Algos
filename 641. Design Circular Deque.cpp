@@ -11,7 +11,7 @@ class Deque
 public:
     Deque(int k)
     {
-        k = K;
+        K=k;
         arr = new int[K];
         front = 0;
         rear = K - 1;
