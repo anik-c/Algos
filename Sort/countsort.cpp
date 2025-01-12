@@ -2,11 +2,11 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
-vector<int> countSort(vector<int> &v)
+vector<int> countSort(vector<int> &arr)
 {
-    int maxi = *max_element(v.begin(), v.end());
+    int maxi = *max_element(arr.begin(), arr.end());
     vector<int> freq(maxi + 1, 0);
-    for (int &ele : v)
+    for (int &ele : arr)
     {
         freq[ele]++;
     }
@@ -14,17 +14,17 @@ vector<int> countSort(vector<int> &v)
     {
         freq[i] = freq[i] + freq[i - 1];
     }
-    vector<int> ans(v.size());
-    for (int i = v.size() - 1; i >= 0; i--)
+    vector<int> ans(arr.size());
+    for (int i = arr.size() - 1; i >= 0; i--)
     {
-        ans[--freq[v[i]]] = v[i];
+        ans[--freq[arr[i]]] = arr[i];
     }
     return ans;
 }
 int main()
 {
-    vector<int> v{7, 2, 1, 5, 3, 6, 7};
-    vector<int> ans = countSort(v);
+    vector<int> arr{7, 2, 1, 5, 3, 6, 7};
+    vector<int> ans = countSort(arr);
     for (int &ele : ans)
     {
         cout << ele << " ";
