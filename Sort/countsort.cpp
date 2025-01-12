@@ -4,6 +4,10 @@
 using namespace std;
 vector<int> countSort(vector<int> &arr)
 {
+    int mini = *min_element(arr.begin(), arr.end());
+    for(int i=0;i<arr.size();i++){
+        arr[i]-=mini;
+    }
     int maxi = *max_element(arr.begin(), arr.end());
     vector<int> freq(maxi + 1, 0);
     for (int &ele : arr)
@@ -17,13 +21,13 @@ vector<int> countSort(vector<int> &arr)
     vector<int> ans(arr.size());
     for (int i = arr.size() - 1; i >= 0; i--)
     {
-        ans[--freq[arr[i]]] = arr[i];
+        ans[--freq[arr[i]]] = arr[i]+mini;
     }
     return ans;
 }
 int main()
 {
-    vector<int> arr{7, 2, 1, 5, 3, 6, 7};
+    vector<int> arr{-10,0,1,10,-4,7};
     vector<int> ans = countSort(arr);
     for (int &ele : ans)
     {
