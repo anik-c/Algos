@@ -27,7 +27,8 @@ vector<int> countSort(vector<int> &arr)
 }
 int main()
 {
-    vector<int> arr{-10,0,1,10,-4,7};
+    // vector<int> arr{-10,0,1,10,-4,7};
+    vector<int> arr{10,1,10,4,7};
     vector<int> ans = countSort(arr);
     for (int &ele : ans)
     {
