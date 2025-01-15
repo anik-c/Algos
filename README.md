@@ -1,1 +1,1 @@
-Solution of LeetCode Problems.
+Algorithms
