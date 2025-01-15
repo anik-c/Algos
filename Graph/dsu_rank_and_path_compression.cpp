@@ -41,8 +41,4 @@ int main()
     Union(0, 1, parent,rank);
     Union(3, 4, parent,rank);
     Union(0, 3, parent,rank);
-    for (int &ele : parent)
-    {
-        cout << ele << " ";
-    }
 }
