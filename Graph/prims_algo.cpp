@@ -2,7 +2,7 @@
 #include <vector>
 #include <queue>
 using namespace std;
-int minCost(vector<vector<pair<int, int>>> &adjlist, vector<bool> &inMST)
+int prims(vector<vector<pair<int, int>>> &adjlist, vector<bool> &inMST)
 {
     int ans = 0;
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
@@ -51,5 +51,5 @@ int main()
     adjlist[6].push_back({5, 2});
     adjlist[6].push_back({4, 4});
     vector<bool> inMST(7, 0);
-    cout << minCost(adjlist, inMST);
+    cout << prims(adjlist, inMST);
 }
