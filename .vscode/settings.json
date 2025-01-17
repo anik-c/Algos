@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "vector": "cpp",
-        "new": "cpp"
+        "new": "cpp",
+        "deque": "cpp",
+        "string": "cpp"
     }
 }
