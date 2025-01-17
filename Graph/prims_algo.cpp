@@ -2,7 +2,7 @@
 #include <vector>
 #include <queue>
 using namespace std;
-int minCost(vector<vector<pair<int, int>>> &adjlist, vector<bool> &visited)
+int minCost(vector<vector<pair<int, int>>> &adjlist, vector<bool> &inMST)
 {
     int ans = 0;
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
@@ -12,13 +12,13 @@ int minCost(vector<vector<pair<int, int>>> &adjlist, vector<bool> &visited)
         int node = pq.top().second;
         int weight = pq.top().first;
         pq.pop();
-        if (visited[node])
+        if (inMST[node])
             continue;
-        visited[node] = 1;
+        inMST[node] = 1;
         ans += weight;
         for (auto &neighbor : adjlist[node])
         {
-            if (!visited[neighbor.first])
+            if (!inMST[neighbor.first])
             {
                 pq.push({neighbor.second, neighbor.first}); 
             }
@@ -50,6 +50,6 @@ int main()
     adjlist[5].push_back({6, 2});
     adjlist[6].push_back({5, 2});
     adjlist[6].push_back({4, 4});
-    vector<bool> visited(7, 0);
-    cout << minCost(adjlist, visited);
+    vector<bool> inMST(7, 0);
+    cout << minCost(adjlist, inMST);
 }
