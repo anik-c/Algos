@@ -44,7 +44,6 @@ int main(){
     ///             |           |           |   \       
     ///             1-----1-----2           5--2--6
     vector<vector<pair<int, int>>> adjlist(7);
-    rank.resize(7);
     adjlist[0].push_back({3, 20});
     adjlist[0].push_back({1, 5});
     adjlist[1].push_back({0, 5});
