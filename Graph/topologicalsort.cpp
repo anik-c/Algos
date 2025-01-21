@@ -30,11 +30,4 @@ int main(){
         cout<<st.top()<<" ";
         st.pop();
     }
-    // for(int i=0;i<vertex;i++){
-    //     cout<<i<<": ";
-    //     for(int j=0;j<adjlist[i].size();j++){
-    //         cout<<adjlist[i][j]<<" ";
-    //     }
-    //     cout<<endl;
-    // }
 }
