@@ -1,43 +1,78 @@
-#include<iostream>
-#include<vector>
-#include<algorithm>
+#include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
-vector<int> parent;
-vector<int> rank;
 
-int find (int x) {
-    if (x == parent[x]) 
+int find(int x, vector<int> &parent)
+{
+    if (x == parent[x])
         return x;
-
-    return parent[x] = find(parent[x]);
+    return parent[x] = find(parent[x], parent);
 }
 
-void Union (int x, int y) {
-    int x_parent = find(x);
-    int y_parent = find(y);
-
-    if (x_parent == y_parent) 
+void Union(int x, int y, vector<int> &parent, vector<int> &rank)
+{
+    int x_parent = find(x, parent);
+    int y_parent = find(y, parent);
+    if (x_parent == y_parent)
         return;
 
-    if(rank[x_parent] > rank[y_parent]) {
+    if (rank[x_parent] > rank[y_parent])
+    {
         parent[y_parent] = x_parent;
-    } else if(rank[x_parent] < rank[y_parent]) {
+    }
+    else if (rank[x_parent] < rank[y_parent])
+    {
         parent[x_parent] = y_parent;
-    } else {
+    }
+    else
+    {
         parent[x_parent] = y_parent;
         rank[y_parent]++;
     }
 }
-auto comparator=[&](vector<pair<int,int>> adj1,vector<pair<int,int>>adj2){
-    return adj1[0].second<adj2[0].second;
-};
-int kruskal(vector<vector<pair<int,int>>> &adjlist){
-    sort(adjlist.begin(),adjlist.end(),comparator);
-    for(auto u:adjlist){
-        
+
+vector<vector<int>> spanningTree(vector<vector<pair<int, int>>> &adjlist)
+{
+    vector<vector<int>> adj;
+    for (int u = 0; u < adjlist.size(); u++)
+    {
+        for (auto &neigh : adjlist[u])
+        {
+            int v = neigh.first;
+            int wt = neigh.second;
+            adj.push_back({u, v, wt});
+        }
     }
+    sort(adj.begin(), adj.end(), [](vector<int> &a, vector<int> &b)
+         { return a[2] < b[2]; });
+
+    return adj;
 }
-int main(){
+int kruskal(vector<vector<pair<int, int>>> &adjlist)
+{
+    spanningTree(adjlist);
+    vector<vector<int>> adj = spanningTree(adjlist);
+    vector<int> parent(adj.size());
+    vector<int> rank(adj.size(), 0);
+    for (int i = 0; i < adj.size(); i++)
+    {
+        parent[i] = i;
+    }
+    int sum = 0;
+    for (auto &temp : adj)
+    {
+        int u = temp[0], v = temp[1], wt = temp[2];
+        if (find(u, parent) != find(v, parent))
+        {
+            Union(u, v, parent, rank);
+            sum += wt;
+        }
+    }
+    return sum;
+}
+int main()
+{
     ///             0----20-----3-----1-----4
     ///             |           |           | \      
     ///             5           5           2  4
@@ -60,4 +95,5 @@ int main(){
     adjlist[5].push_back({6, 2});
     adjlist[6].push_back({5, 2});
     adjlist[6].push_back({4, 4});
+    cout<<kruskal(adjlist);
 }
