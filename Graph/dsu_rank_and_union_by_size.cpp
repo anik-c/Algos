@@ -1,4 +1,4 @@
-#include <iostream>
+#include<iostream>
 #include <vector>
 using namespace std;
 int find(int x, vector<int> &parent)
@@ -7,7 +7,7 @@ int find(int x, vector<int> &parent)
         return x;
     return parent[x] = find(parent[x], parent);
 }
-void Union(int a, int b, vector<int> &parent,vector<int> &rank)
+void Union(int a, int b, vector<int> &parent,vector<int> &size)
 {
     int a_parent = find(a, parent);
     int b_parent = find(b, parent);
@@ -15,17 +15,19 @@ void Union(int a, int b, vector<int> &parent,vector<int> &rank)
     {
         return;
     }
-    else if (rank[a_parent] > rank[b_parent])
+    else if (size[a_parent] > size[b_parent])
     {
         parent[b_parent] = a_parent;
+        size[a_parent]+=size[b_parent];
     }
-    else if (rank[b_parent] > rank[a_parent])
+    else if (size[b_parent] > size[a_parent])
     {
         parent[a_parent] = b_parent;
+        size[b_parent]+=size[a_parent];
     }
     else{
         parent[b_parent]=a_parent;
-        rank[a_parent]++;
+        size[a_parent]++;
     }
 }
 int main()
@@ -33,14 +35,14 @@ int main()
     int n;
     cin >> n;
     vector<int> parent(n);
-    vector<int> rank(n,0);
+    vector<int> size(n,1);
     for (int i = 0; i < n; i++)
     {
         parent[i] = i;
     }
-    Union(0, 1, parent,rank);
-    Union(3, 4, parent,rank);
-    Union(0, 3, parent,rank);
+    Union(0, 1, parent,size);
+    Union(3, 4, parent,size);
+    Union(0, 3, parent,size);
     for (int i = 0; i < n; i++) {
         find(i, parent);
     }
