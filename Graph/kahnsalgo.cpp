@@ -16,7 +16,7 @@ void kahns(vector<vector<int>>&adjlist,vector<int> &indegree){
         for(int &v:adjlist[node]){
             indegree[v]--;
             if(indegree[v]==0){
-                q.push(v);
+                q.push(v);                  
             }
         }
     }
