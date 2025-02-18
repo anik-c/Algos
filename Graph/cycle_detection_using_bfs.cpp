@@ -4,7 +4,9 @@
 using namespace std;
 bool dfs(vector<vector<int>> &adjlist,vector<int> &indegree){
     queue<int> q;
-    q.push(0);
+    for(int i=0;i<indegree.size();i++){
+        if(indegree[i]==0) q.push(i);
+    }
     int count=0;
     while(!q.empty()){
         int node=q.front();
