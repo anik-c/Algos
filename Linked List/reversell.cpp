@@ -10,8 +10,8 @@ class Node{
     }
 };
 Node*  reversell(Node* &head){
-    if(!head->next) return head;
-    Node*last=reversell(head->next); 
+    if(!head || !head->next) return head;
+    Node* last=reversell(head->next);
     head->next->next=head;
     head->next=NULL;
     return last;
@@ -23,8 +23,7 @@ int main(){
     head->next->next->next=new Node(15);
     head->next->next->next->next=new Node(16);
     head->next->next->next->next->next=new Node(17);
-    Node *temp =reversell(head);
-    // Node *temp=head;
+    Node *temp=reversell(head);
     while(temp){
         cout<<temp->val<<" ";
         temp=temp->next;
