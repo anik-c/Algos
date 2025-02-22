@@ -16,11 +16,15 @@ void levelorder(Tree* &t){
     queue<Tree*>q;
     q.push(t);
     while(!q.empty()){
-        Tree* temp=q.front();
-        q.pop();
-        cout<<temp->val<<" ";
-        if(temp->left) q.push(temp->left);
-        if(temp->right) q.push(temp->right);
+        int size=q.size();
+        while(size--){
+            Tree* temp=q.front();
+            q.pop();
+            cout<<temp->val<<" ";
+            if(temp->left) q.push(temp->left);
+            if(temp->right) q.push(temp->right);
+        }
+        cout<<endl;
     }
 }
 int main(){
